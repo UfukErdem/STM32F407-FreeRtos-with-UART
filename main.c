@@ -15,13 +15,12 @@ void send_Thread_Fnc();
 // UART INTERRUPTS
 void UART4_IRQHandler(void)
 {		
-	
 	if(USART_GetITStatus(UART4, USART_IT_RXNE) == SET)		              
 	{	
 		array_byte = USART_ReceiveData(UART4);
 		
 		if(array_byte != '.')	 						{			array[array_Cnt++] = array_byte;			}
-		else															{			osSignalSet(send_Thread, 0x01);	 			}
+		else									{			osSignalSet(send_Thread, 0x01);	 			}
 		
 		USART_ClearITPendingBit(UART4, USART_IT_RXNE); 			
 	}	
